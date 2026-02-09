@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Special Valentine Message 💖</title>
+<style>
+body{
+  margin:0;
+  height:100vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  background:linear-gradient(135deg,#ffd1dc,#ffe6f0);
+  font-family:'Segoe UI',sans-serif;
+}
+.card{
+  background:white;
+  padding:25px;
+  border-radius:16px;
+  width:320px;
+  text-align:center;
+  box-shadow:0 10px 30px rgba(0,0,0,.15);
+}
+h2{color:#d6336c;}
+input,textarea{
+  width:100%;
+  padding:10px;
+  margin:8px 0;
+  border-radius:8px;
+  border:1px solid #ddd;
+}
+button{
+  padding:10px 15px;
+  border:none;
+  border-radius:20px;
+  cursor:pointer;
+  font-weight:bold;
+}
+.gen{background:#ff5c8a;color:white;}
+.copy{background:#ccc;margin-left:5px;}
+a{word-break:break-all;}
+.heart{
+  position:fixed;
+  font-size:20px;
+  animation:float 6s infinite;
+  opacity:.6;
+}
+@keyframes float{
+  from{transform:translateY(100vh);}
+  to{transform:translateY(-10vh);}
+}
+</style>
+</head>
+
+<body>
+
+<div class="card" id="formBox">
+  <h2>💖 Special Valentine Message 💖</h2>
+  <input id="name" placeholder="Enter special person's name">
+  <textarea id="msg" maxlength="226" placeholder="Enter your message"></textarea>
+  <br>
+  <button class="gen" onclick="generate()">Generate URL</button>
+  <button class="copy" onclick="copy()">Copy URL</button>
+  <p id="output"></p>
+</div>
+
+<script>
+function generate(){
+ let n=encodeURIComponent(name.value);
+ let m=encodeURIComponent(msg.value);
+ let url=location.origin+location.pathname+"?n="+n+"&m="+m;
+ output.innerHTML=`<a href="${url}" target="_blank">${url}</a>`;
+}
+
+function copy(){
+ navigator.clipboard.writeText(output.innerText);
+ alert("Link Copied 💕");
+}
+
+let p=new URLSearchParams(location.search);
+if(p.get("n")){
+ document.body.innerHTML=`
+ <div class="card">
+ <h2>💝 Dear ${p.get("n")} 💝</h2>
+ <p>${p.get("m")}</p>
+ </div>`;
+}
+
+for(let i=0;i<15;i++){
+ let h=document.createElement("div");
+ h.className="heart";
+ h.innerHTML="❤️";
+ h.style.left=Math.random()*100+"vw";
+ h.style.animationDelay=Math.random()*5+"s";
+ document.body.appendChild(h);
+}
+</script>
+
+</body>
+</html>
